@@ -1,4 +1,7 @@
 import java.util.List;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,35 +18,82 @@ public class RentalSystem {
         return instance;
     }
     
-    public void addVehicle(Vehicle vehicle) {
-        vehicles.add(vehicle);
+    public void saveVehicle(Vehicle vehicle) {
+        try (BufferedWriter writer= new BufferedWriter(new FileWriter("vehicles.txt", true))) {
+        	writer.append(vehicle.getLicensePlate() + "," + 
+                          vehicle.getMake() + "," + 
+        			      vehicle.getModel() + "," + 
+                          vehicle.getYear());
+        	writer.close();
+        		
+    } catch (IOException e) {
+    	System.out.println("**ERROR** in adding vehicle: " + e.getMessage());
+        }
     }
 
+    public void addVehicle(Vehicle vehicle) {
+        vehicles.add(vehicle);
+        saveVehicle(vehicle);
+    }
+
+    public void saveCustomer(Customer customer) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("customers.txt", true))){
+        	writer.append(customer.getCustomerId()+","+
+                          customer.getCustomerName());
+        	writer.close();
+            
+        } catch (IOException e) {
+        	System.out.println("**ERROR** in adding customer: " + e.getMessage());        
+        	}
+    }
+    
     public void addCustomer(Customer customer) {
         customers.add(customer);
+        saveCustomer(customer);
     }
 
     public void rentVehicle(Vehicle vehicle, Customer customer, LocalDate date, double amount) {
         if (vehicle.getStatus() == Vehicle.VehicleStatus.AVAILABLE) {
             vehicle.setStatus(Vehicle.VehicleStatus.RENTED);
             rentalHistory.addRecord(new RentalRecord(vehicle, customer, date, amount, "RENT"));
+            RentalRecord record=new RentalRecord(vehicle, customer, date, amount, "RENT");
+            rentalHistory.addRecord(record);
             System.out.println("Vehicle rented to " + customer.getCustomerName());
+            saveRecord(record);
         }
         else {
             System.out.println("Vehicle is not available for renting.");
         }
+        
     }
 
     public void returnVehicle(Vehicle vehicle, Customer customer, LocalDate date, double extraFees) {
         if (vehicle.getStatus() == Vehicle.VehicleStatus.RENTED) {
             vehicle.setStatus(Vehicle.VehicleStatus.AVAILABLE);
             rentalHistory.addRecord(new RentalRecord(vehicle, customer, date, extraFees, "RETURN"));
+            RentalRecord record = new RentalRecord(vehicle, customer, date, extraFees, "RETURN");
+            rentalHistory.addRecord(record);
             System.out.println("Vehicle returned by " + customer.getCustomerName());
+            saveRecord(record);
         }
         else {
             System.out.println("Vehicle is not rented.");
         }
-    }    
+    }   
+    
+    public void saveRecord(RentalRecord record) {
+        try (BufferedWriter writer = new BufferedWriter (new FileWriter("rental_records.txt", true))) {
+        	
+            writer.append((record.getVehicle().getLicensePlate() + "," + 
+                           record.getCustomer().getCustomerId() + "," + 
+            		       record.getRecordDate() + "," + 
+                           record.getTotalAmount() + "," +
+            		       record.getRecordType()));
+            writer.close();
+        } catch (IOException e) {
+        	System.out.println("**ERROR** in ading record: " + e.getMessage());        
+        	}
+    }
 
     public void displayAvailableVehicles() {
     	System.out.println("|     Type         |\tPlate\t|\tMake\t|\tModel\t|\tYear\t|");
