@@ -1,1 +1,3 @@
-| 11 | Honda | Wagonr | 2014 | AVAILABLE | | Seats: 4
+| AAA111 | null | null | 2019 | AVAILABLE | | Seats: 4
+| BBB222 | null | null | 2021 | AVAILABLE | | Seats: 4
+| CCC333 | null | null | 2024 | AVAILABLE | | Seats: 4
