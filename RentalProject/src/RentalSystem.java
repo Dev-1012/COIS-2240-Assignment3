@@ -34,9 +34,15 @@ public class RentalSystem {
         }
     }
 
-    public void addVehicle(Vehicle vehicle) {
+    public boolean addVehicle(Vehicle vehicle) {
+    	String plate =vehicle.getLicensePlate();
+    	if(findVehicleByPlate(plate)!=null) {
+    		System.out.println("The given license plate:"+ plate + ",is already registered in the system");
+    		return false;
+    	}
         vehicles.add(vehicle);
         saveVehicle(vehicle);
+		return true;
     }
 
     public void saveCustomer(Customer customer) {
@@ -49,9 +55,15 @@ public class RentalSystem {
         	}
     }
     
-    public void addCustomer(Customer customer) {
+    public boolean addCustomer(Customer customer) {
+    	int Id=customer.getCustomerId();
+    	if(findCustomerById(Id)!=null) {
+    		System.out.println("The given customer id:"+ Id + ",is already registered in the system");
+    		return false;
+    	}
         customers.add(customer);
         saveCustomer(customer);
+        return true;
     }
 
     public void rentVehicle(Vehicle vehicle, Customer customer, LocalDate date, double amount) {
