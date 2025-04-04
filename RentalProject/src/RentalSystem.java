@@ -116,16 +116,16 @@ private void loadVehicles() {
         while ((line = reader.readLine()) != null) {
             String[] vehicleData = line.split(" \\| ");
             if (vehicleData.length < 6) continue;
-            String licensePlate=vehicleData[1];
-            String make=vehicleData[2].trim();
-            String model=vehicleData[3].trim();
-            int year=Integer.parseInt(vehicleData[4].trim());
-            Vehicle.VehicleStatus status=Vehicle.VehicleStatus.valueOf(vehicleData[5]);
+            String licensePlate=vehicleData[0];
+            String make=vehicleData[1].trim();
+            String model=vehicleData[2].trim();
+            int year=Integer.parseInt(vehicleData[3].trim());
+            Vehicle.VehicleStatus status=Vehicle.VehicleStatus.valueOf(vehicleData[4]);
             
             Vehicle vehicle;
             if (line.contains("Seats: ")) {
                 // For Car class
-                int seats = Integer.parseInt(vehicleData[6].split(": ")[1]);
+                int seats = Integer.parseInt(vehicleData[5].split(": ")[1]);
                 vehicle = new Car(make, model, year, seats);
             }
             else if (line.contains("Sidecar: ")) {

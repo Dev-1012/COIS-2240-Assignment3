@@ -8,9 +8,9 @@ public abstract class Vehicle {
     public enum VehicleStatus { AVAILABLE, RESERVED, RENTED, MAINTENANCE, OUTOFSERVICE }
 
     public Vehicle(String make, String model, int year) {
-    	capitalize(make);
+    	this.make=capitalize(make);
     	
-    	capitalize(model);
+    	this.model=capitalize(model);
     	
         this.year = year;
         this.status = VehicleStatus.AVAILABLE;

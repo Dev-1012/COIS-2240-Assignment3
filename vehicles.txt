@@ -1,3 +1,5 @@
 | AAA111 | null | null | 2019 | AVAILABLE | | Seats: 4
 | BBB222 | null | null | 2021 | AVAILABLE | | Seats: 4
 | CCC333 | null | null | 2024 | AVAILABLE | | Seats: 4
+| AAA111 | null | null | 2019 | AVAILABLE | | Seats: 4
+| AAA111 | Toyota | Corolla | 2019 | AVAILABLE | | Seats: 4
