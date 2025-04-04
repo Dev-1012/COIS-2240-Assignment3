@@ -35,13 +35,13 @@ public class RentalSystem {
     }
 
     public boolean addVehicle(Vehicle vehicle) {
-    	String plate =vehicle.getLicensePlate();
-    	if(findVehicleByPlate(plate)!=null) {
-    		System.out.println("The given license plate:"+ plate + ",is already registered in the system");
+    	
+    	if(findVehicleByPlate(vehicle.getLicensePlate())!=null) {
+    		System.out.println("The given license plate:"+ vehicle.getLicensePlate() + ",is already registered in the system");
     		return false;
     	}
         vehicles.add(vehicle);
-        saveVehicle(vehicle);
+        this.saveVehicle(vehicle);
 		return true;
     }
 
@@ -56,13 +56,13 @@ public class RentalSystem {
     }
     
     public boolean addCustomer(Customer customer) {
-    	int Id=customer.getCustomerId();
-    	if(findCustomerById(Id)!=null) {
-    		System.out.println("The given customer id:"+ Id + ",is already registered in the system");
+    	
+    	if(findCustomerById(customer.getCustomerId())!=null) {
+    		System.out.println("The given customer id:"+ customer.getCustomerId() + ",is already registered in the system");
     		return false;
     	}
         customers.add(customer);
-        saveCustomer(customer);
+        this.saveCustomer(customer);
         return true;
     }
 
