@@ -1,3 +1,1 @@
-| AAA111 | Toyota | Corolla | 2019 | AVAILABLE | | Seats: 4
-| BBB222 | Honda | Civic | 2021 | AVAILABLE | | Seats: 4
-| CCC333 | Ford | Focus | 2024 | AVAILABLE | | Seats: 4
+| DEL111 | Hyundai | Creta | 2025 | AVAILABLE | | Seats: 5
