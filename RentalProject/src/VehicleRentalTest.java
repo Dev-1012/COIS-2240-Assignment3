@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.time.LocalDate;
 
 class VehicleRentalTest {
@@ -62,6 +65,20 @@ class VehicleRentalTest {
         assertEquals(Vehicle.VehicleStatus.AVAILABLE, car.getStatus(), "VEHICLE STATUS SHOULD REMAIN AVAILABLE");
 
     }
+    
+    @Test
+	public void testSingletonRentalSystem() {
+		try {
+			Constructor<RentalSystem> constructor = RentalSystem.class.getDeclaredConstructor();
+			int modifiers = constructor.getModifiers();
+			assertEquals(modifiers, Modifier.PRIVATE);
+            RentalSystem rentalSystem = RentalSystem.getInstance();
+			assertNotNull(rentalSystem);
+		} 
+		catch(Exception e) {
+			fail("Exception occurred: " + e.getMessage());
+		}
+	} 
 }
 
 
